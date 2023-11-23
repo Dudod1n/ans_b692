@@ -1,0 +1,6 @@
+---
+- name: Testing role nginx_php
+  hosts: test
+  become: true
+  roles:
+    - nginx_php
