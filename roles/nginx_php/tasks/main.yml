@@ -17,14 +17,22 @@
 
 - name: Ensure php-fpm service is running
   ansible.builtin.service:
-    name: php-fpm
+    name: php8.1-fpm
     state: started
     enabled: true
 
 - name: Copy index.php file
   ansible.builtin.copy:
     src: index.php
-    dest: /usr/share/nginx/html/index.php
+    dest: /var/www/html/index.php
+    mode: preserve
+  notify:
+    - Reload Nginx
+
+- name: Edit default.conf
+  ansible.builtin.template:
+    src: default.conf.j2
+    dest: /etc/nginx/sites-available/default
     mode: preserve
   notify:
     - Reload Nginx
