@@ -8,7 +8,7 @@
 - name: Copy dnsmasq.conf file
   ansible.builtin.template:
     src: dnsmasq.conf.j2
-    dest: /etc/dnsmasq.d/
+    dest: /etc/dnsmasq.d/dnsmasq.conf
     mode: "660"
   notify:
     - Restart dnsmasq
