@@ -1,2 +1,4 @@
 ---
+exec_user: dudod1n
+nginx_document_root: /opt/nginx/ansible
 # vars file for nginx_php
