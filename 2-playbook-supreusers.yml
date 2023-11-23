@@ -1,0 +1,25 @@
+---
+- name: Configure superusers group and sudo rules
+  hosts: all
+  become: true
+  tasks:
+
+    - name: Create superusers group
+      ansible.builtin.group:
+        name: superusers
+        state: present
+
+    - name: Add users user2 and user3 to superusers group
+      ansible.builtin.user:
+        name: "{{ item }}"
+        groups: superusers
+        append: true
+      with_items:
+        - user2
+        - user3
+
+    - name: Add sudo rule for superusers
+      ansible.builtin.lineinfile:
+        dest: /etc/sudoers.d/sudoers
+        line: "%superusers ALL=(ALL) NOPASSWD: ALL"
+        validate: 'visudo -cf %s'
