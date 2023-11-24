@@ -12,4 +12,4 @@ user2 и user3, и которая, выполнив sudo -i, сможет пов
 
 *Некоторые файлы локализованы на русский язык, это не обязательное требование, просто я так захотел* :smile:
 
-![Логотип Ansible](https://avatars.githubusercontent.com/u/1507452?s=280&v=4)
+![Логотип Ansible](https://velog.velcdn.com/images/salgu1998/post/c94c5162-95c3-4159-98bf-9f12446b381a/image.png)
