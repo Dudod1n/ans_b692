@@ -1,5 +1,5 @@
 ---
-- name: Install nginx
+- name: Установка nginx и php-fpm.
   ansible.builtin.apt:
     name: "{{ item }}"
     state: present
@@ -7,26 +7,26 @@
     - nginx
     - php-fpm
 
-- name: Ensure nginx service is running
+- name: Проверка запуска nginx сервиса.
   ansible.builtin.service:
     name: nginx
     state: started
     enabled: true
 
-- name: Ensure php-fpm service is running
+- name: Проверка запуска php-fpm сервиса.
   ansible.builtin.service:
     name: php8.1-fpm
     state: started
     enabled: true
 
-- name: Create DocumentRoot directory
+- name: Создание DocumentRoot директории.
   ansible.builtin.file:
     path: "{{ nginx_document_root }}"
     state: directory
     mode: "755"
     owner: "{{ exec_user }}"
 
-- name: Edit default.conf
+- name: Изменение default.conf по шаблону.
   ansible.builtin.template:
     src: localhost.conf.j2
     dest: /etc/nginx/sites-available/default
@@ -34,18 +34,18 @@
   notify:
     - Reload Nginx
 
-- name: Edit nginx.conf
+- name: Изменение nginx.conf по шаблону.
   ansible.builtin.template:
     src: nginx.conf.j2
     dest: /etc/nginx/nginx.conf
     mode: preserve
   notify:
-    - Reload Nginx
+    - Перезагрузка Nginx
 
-- name: Copy index.php file
+- name: Копирование index.php файла.
   ansible.builtin.copy:
     src: index.php
     dest: "{{ nginx_document_root }}/index.php"
     mode: preserve
   notify:
-    - Reload Nginx
+    - Перезагрузка Nginx
