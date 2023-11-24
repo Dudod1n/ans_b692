@@ -1,14 +1,15 @@
 ---
 # tasks file for dnsmasq
 - name: Install dnsmasq
-  ansible.builtin.package:
+  ansible.builtin.apt:
     name: dnsmasq
     state: present
+    update_cache: true
 
 - name: Copy dnsmasq.conf file
   ansible.builtin.template:
     src: dnsmasq.conf.j2
-    dest: /etc/dnsmasq.d/dnsmasq.conf
+    dest: "{{ dnsmasq_config_file }}"
     mode: "660"
   notify:
     - Restart dnsmasq

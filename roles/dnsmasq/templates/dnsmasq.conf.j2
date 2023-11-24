@@ -1,5 +1,4 @@
-domain=mydomain.com
-address=/extdomain.net/127.0.0.1
-cname=sambaserver,smb
-no-hosts
-addn-hosts=/path/to/file
+listen-address={{ dnsmasq_listen_address }}
+resolv-file={{ dnsmasq_resolv_file }}
+cache-size={{ dnsmasq_cache_size }}
+port={{ dnsmasq_port }}
